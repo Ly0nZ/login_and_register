@@ -5,11 +5,23 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie-edge">
 	<title>Register</title>
+	<style>
+		.error{
+			color: red;
+		}
+	</style>
 </head>
 <body>
 
 	<form action="/register" method="POST">
 		{% csrf_token %}
+		{% if messages %}
+		<ul class="messages">
+			{% for message in messages %}
+			<li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+				{% endfor %}
+		</ul>
+		{% endif %}
 		<p>First Name <input type="text" name="first_name"></p>
 		<p>Last Name <input type="text" name="last_name"></p>
 		<p>Email <input type="text" name="email"></p>
